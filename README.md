@@ -20,6 +20,15 @@ A step by step series to get a development env running
 
 ```
 
+## Deployment
+
+Application is deployed using netlify(https://app.netlify.com/)
+
+```
+https://novo-onboard.netlify.app/
+
+```
+
 ## Running the tests
 
 The test cases in the application uses the snapshot testing of Jest.
