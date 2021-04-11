@@ -1,4 +1,4 @@
-import { RESET_STATE, REQUEST_DATA, SAVE_DATA,  GET_DATA, INCREMENT_BOARDING_STEP, DECREMENT_BOARDING_STEP} from '../actions';
+import { RESET_STATE, REQUEST_DATA, INCREMENT_BOARDING_STEP, DECREMENT_BOARDING_STEP} from '../actions';
 
 const initialState = {
     isFetching: false,
@@ -14,17 +14,6 @@ function apps( state=initialState, action={}) {
       return Object.assign({}, state, {
         isFetching: true
       });
-    case SAVE_DATA: {
-      return Object.assign({}, state, {
-        isFetching: false,
-      });
-    }
-    case GET_DATA: {
-      return Object.assign({}, state, {
-        isFetching: false,
-      });
-    }
-
     case DECREMENT_BOARDING_STEP: {
       let title = ''
       if(state.onBoardingStep === 2) {
@@ -33,12 +22,20 @@ function apps( state=initialState, action={}) {
         title = 'Business Info'
       }
 
+      if (action?.data) {
+        return Object.assign({}, state, {
+          onBoardingStep: state.onBoardingStep - 1,
+          modalTitle: title,
+          formInfo: action?.data,
+          isFetching: false
+        });
+      }
+
       return Object.assign({}, state, {
         onBoardingStep: state.onBoardingStep - 1,
         modalTitle: title
       });
     }
-
     case INCREMENT_BOARDING_STEP: {
       let title = ''
       if(state.onBoardingStep === 1) {
@@ -51,7 +48,8 @@ function apps( state=initialState, action={}) {
         onBoardingStep: state.onBoardingStep + 1,
         modalTitle: title,
         formInfo: action.formRawValues,
-        reviewFormFields: action.data
+        reviewFormFields: action.data,
+        isFetching: false
       });
     }
 

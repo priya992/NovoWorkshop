@@ -1,6 +1,4 @@
 export const REQUEST_DATA = 'REQUEST_DATA'
-export const SAVE_DATA = 'SAVE_DATA'
-export const GET_DATA = 'GET_DATA'
 export const INCREMENT_BOARDING_STEP = 'INCREMENT_BOARDING_STEP'
 export const DECREMENT_BOARDING_STEP = 'DECREMENT_BOARDING_STEP'
 export const RESET_STATE = 'RESET_STATE'
@@ -11,31 +9,9 @@ function requestData() {
   }
 }
 
-function receivedData(json) {
-  return {
-    type: GET_DATA,
-    apps: json
-  }
-}
-
-function savedData(json) {
-  return {
-    type: SAVE_DATA,
-    apps: json
-  }
-}
-
-export function fetchData() {
-  return dispatch => {
-    dispatch(requestData())
-
-    //TODO needs to add localStorage here...
-    // return fetch(contentPage1)
-    //   .then(response => response.json())
-    //   .then(json => dispatch(receivedData(json)))
-  }
-}
-
+/*
+  Action for nextbutton on form
+*/
 export function incrementStep(formRawValues, data) {
   return dispatch => {
     dispatch(requestData())
@@ -50,13 +26,31 @@ export function incrementStep(formRawValues, data) {
   }
 }
 
+/*
+  Action for backbutton on form
+*/
+export function decrementStep(formView='') {
+  if (formView && formView === 'previewState') {
+    return dispatch => {
+      dispatch(requestData())
+      setTimeout(() => {
+        const data = localStorage.getItem('onBoardingFormData');
+        dispatch({
+          type: DECREMENT_BOARDING_STEP,
+          data: JSON.parse(data)
+        })
+      }, 500)
+    }
+  }
 
-export function decrementStep() {
   return {
     type: DECREMENT_BOARDING_STEP
   }
 }
 
+/*
+  action to reset all store values and clearing localStorage
+*/
 export function resetState() {
   localStorage.removeItem('onBoardingFormData');
   return {

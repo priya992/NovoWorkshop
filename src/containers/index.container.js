@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import loadable from '@loadable/component'
 import { Modal, Button } from 'antd';
 import styles from './styles.scss'
-import { resetState, fetchData, saveData, incrementStep, decrementStep } from '../actions'
+import { resetState, incrementStep, decrementStep } from '../actions'
 
 /*
   Not creating the chunk for header and home component as it is visible to user once loaded
@@ -65,12 +65,6 @@ class Main extends Component {
     };
   }
 
-  componentDidMount() {
-    const { fetchFormData } = this.props
-    // interactive('elementMinimise');
-    fetchFormData()
-  }
-
   showModal() {
     this.setState({
       isModalVisible: true
@@ -112,6 +106,7 @@ class Main extends Component {
                 decrementStepHandler={decrementStepHandler}
                 formInfo={formInfo}
                 reviewFormFields={reviewFormFields}
+                handleSubmit={() => this.handleClose()}
               />
             }
           />
@@ -122,12 +117,10 @@ class Main extends Component {
 }
 
 const bindAction = (dispatch) => ({
-    fetchFormData: () => dispatch(fetchData()),
-    saveFormData: (data) => dispatch(saveData(data)),
     incrementStepHandler: (formItems, data) => {
       return dispatch(incrementStep(formItems, data))
     },
-    decrementStepHandler: (data) => dispatch(decrementStep(data)),
+    decrementStepHandler: (formView) => dispatch(decrementStep(formView)),
     resetStateHandler: (data) => dispatch(resetState(data)),
 });
 

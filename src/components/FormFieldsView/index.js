@@ -49,6 +49,61 @@ const FormView = ({ reviewFormFields, formInfo, formValue, onBoardingStep, incre
     }
   }, [radioGroupList])
 
+  const setDefaultFormValue = (data) => {
+    const formVal = {}
+    for (const val in data) {
+      formVal[val] = data[val]
+    }
+
+    if (data?.sameAsPersonal) {
+      setRadioList({
+        sameAsPersonal: 1
+      })
+
+      const newRadioGroupData = {
+        elementType: 'RadioGroup',
+        value: '',
+        name: 'address-debit',
+        data: [
+          {
+            value: 0,
+            label: 'Same As Personal',
+            name: 'address-personal-debit',
+          }
+        ]
+      }
+      setRadioGroupData(newRadioGroupData)
+    }
+
+    if (data?.['address-debit'] === 'address-personal-debit') {
+      setRadioGroupList({
+        ['address-debit']: {
+          ['address-personal-debit']: 1
+        }
+      });
+    } else if (data?.['address-debit'] === 'address-bussiness-debit') {
+      setRadioGroupList({
+        ['address-debit']: {
+          ['address-bussiness-debit']: 1
+        }
+      });
+    }
+
+    form.setFieldsValue(formVal);
+  }
+
+  useEffect(() => {
+    if (formInfo?.length>0 && formInfo[1]?.businessInfo && onBoardingStep === 2) {
+      const data = formInfo[1].businessInfo
+      setDefaultFormValue(data)
+    }
+
+    if (formInfo?.length>0 && formInfo[0]?.personalInfo) {
+      const data = formInfo[0].personalInfo
+      setDefaultFormValue(data)
+    }
+  }, [])
+
   const [form] = Form.useForm();
 
   const submitHandler = values => {

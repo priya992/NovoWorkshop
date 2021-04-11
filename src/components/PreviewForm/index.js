@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './styles.scss'
 
-const Preview = ({reviewFormFields, onBoardingStep, decrementStepHandler}) => {
+const Preview = ({handleSubmit, reviewFormFields, onBoardingStep, decrementStepHandler}) => {
   const fieldValue = Object.keys(reviewFormFields)
   return (
     <div className={style.previewContainer}>
@@ -29,10 +29,10 @@ const Preview = ({reviewFormFields, onBoardingStep, decrementStepHandler}) => {
         })
       }
       <div className={style.btnContainer}>
-        <button className={style.btn} onClick={decrementStepHandler}>
+        <button className={style.btn} onClick={() => decrementStepHandler('previewState')}>
           Back
         </button>
-        <button className={style.btn}>
+        <button className={style.btn} onClick={handleSubmit}>
           Submit
         </button>
       </div>

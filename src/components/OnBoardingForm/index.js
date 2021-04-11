@@ -2,9 +2,8 @@ import React from 'react';
 import FormFieldsView from '@components/FormFieldsView'
 import PreviewForm from '@components/PreviewForm'
 import { personalInfo, bussinessInfo } from '../../constants'
-import style from './styles.scss'
 
-const OnBoardingForm = ({reviewFormFields, formInfo, onBoardingStep, incrementStepHandler, decrementStepHandler}) => {
+const OnBoardingForm = ({handleSubmit, reviewFormFields, formInfo, onBoardingStep, incrementStepHandler, decrementStepHandler}) => {
   let formValue = []
 
   if(onBoardingStep === 1) {
@@ -18,6 +17,7 @@ const OnBoardingForm = ({reviewFormFields, formInfo, onBoardingStep, incrementSt
         reviewFormFields={reviewFormFields}
         onBoardingStep={onBoardingStep}
         decrementStepHandler={decrementStepHandler}
+        handleSubmit={handleSubmit}
       />
     )
   }

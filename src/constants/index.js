@@ -1,3 +1,6 @@
+/*
+  Configuartion for formFields
+*/
 export const personalInfo = [
   {
     value: '',
@@ -13,7 +16,7 @@ export const personalInfo = [
     value: '',
     label: 'SSN',
     isRequired: 1,
-    validation: /^[0-9]{2}$/i,
+    validation: /^[0-9]{9}$/i,
     error: false,
     elementType: 'InputNumber',
     name: 'ssn',
