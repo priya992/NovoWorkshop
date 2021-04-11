@@ -46,6 +46,10 @@ const FormView = ({ reviewFormFields, formInfo, formValue, onBoardingStep, incre
       form.setFieldsValue({
         ['address-debit']: 'address-personal-debit',
       });
+    } else {
+      form.setFieldsValue({
+        ['address-debit']: '',
+      });
     }
   }, [radioGroupList])
 
@@ -112,7 +116,8 @@ const FormView = ({ reviewFormFields, formInfo, formValue, onBoardingStep, incre
     if(onBoardingStep === 1) {
       incrementStepHandler([{personalInfo: values}], data)
     } else if(onBoardingStep === 2) {
-      incrementStepHandler([...formInfo, {businessInfo: values}], data)
+      const personalData = formInfo[0].personalInfo
+      incrementStepHandler([{personalInfo: personalData}, {businessInfo: values}], data)
     }
   };
 
