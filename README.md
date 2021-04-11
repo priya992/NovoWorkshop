@@ -33,7 +33,9 @@ https://novo-onboard.netlify.app/
 
 The test cases in the application uses the snapshot testing of Jest.
 
-Run test cases using the below command on terminal
+Currently facing test config issues. So created a seperate PR for that https://github.com/priya992/NovoWorkshop/pull/2
+
+To run test cases from this above branch, we can use command on terminal
 
 ```
 1. npm run test
@@ -55,6 +57,7 @@ On click of button a different modal chunk is loaded that has multi-step form ki
 10. Added different chunk for footer, modal components.
 11. Maintaining application state using redux.
 12. Using hooks in the components.
+13. I am using antd external library for UI. Using this because in our current company for many projects we are using this library. And it has some really great features for Forms.
 
 
 ### What can be improved
